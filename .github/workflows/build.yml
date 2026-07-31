@@ -1,0 +1,46 @@
+name: Build Website
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run tests
+        run: pnpm test -- --watchAll=false
+        env:
+          CI: true
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-build-output
+          path: dist
+          retention-days: 7
