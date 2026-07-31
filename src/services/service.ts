@@ -8,11 +8,14 @@ export default class Service<T extends Model> {
     }
 
     getAll(): T[] {
+        console.log(`${this.endpoint}/`);
         // Simulate getAll data (until I create a backend test)
         return new Array<T>();
     }
 
     getById(id: String): T | null {
+        console.log(id);
+
         const data: T | null = null;
         return data;
     }
