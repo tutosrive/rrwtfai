@@ -40,7 +40,7 @@ jobs:
               run: pnpm install --frozen-lockfile
 
             - name: Build
-              run: pnpm run build
+              run: pnpm build
               env:
                   VITE_APIURL_BASE: ${{secrets.VITE_APIURL_BASE}}
                   VITE_API_PREFIX: ${{secrets.VITE_API_PREFIX}}
