@@ -1,13 +1,7 @@
-import { Link } from 'react-router-dom';
-
 export default function HomePage() {
     return (
-        <>
+        <div className='w-full h-full flex items-center justify-center'>
             <h1>Home Page</h1>
-
-            <Link className='bg-sky-500 rounded' to='/users'>
-                Load Users
-            </Link>
-        </>
+        </div>
     );
 }

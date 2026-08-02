@@ -18,15 +18,17 @@ export default function UserPage() {
     }, []);
 
     return (
-        <>
+        <div className='flex flex-col items-center justify-center p-5'>
             <h1>User Page</h1>
-            {users ? (
-                users.map((u) => {
-                    return <UserProfile key={u.id?.toString()} user={u} />;
-                })
-            ) : (
-                <p>Loading Page Users ...</p>
-            )}
-        </>
+            <div className='flex flex-wrap items-center justify-center'>
+                {users ? (
+                    users.map((u) => {
+                        return <UserProfile key={u.id?.toString()} user={u} />;
+                    })
+                ) : (
+                    <p>Loading Page Users ...</p>
+                )}
+            </div>
+        </div>
     );
 }
