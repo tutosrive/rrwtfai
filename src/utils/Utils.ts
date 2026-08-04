@@ -6,10 +6,10 @@ export default class Utils {
 
             switch (endpoint) {
                 case 'users':
-                    title = 'Users';
+                    title = 'All Users';
                     break;
                 case 'users-v1':
-                    title = 'Users (V1)';
+                    title = 'All Users (V1)';
                     break;
                 default:
                     title = 'Home';

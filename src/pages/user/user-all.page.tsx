@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type UserModel from '../../models/user.model';
 import UserProfile from '../../components/user/user-profile.component';
 import UserService from '../../services/user.service';
+import Loader from '../../components/loading.component';
 
 const UserAllPage = () => {
     const service: UserService = new UserService();
@@ -28,7 +29,7 @@ const UserAllPage = () => {
                     return <UserProfile key={user.id?.toString()} user={user} />;
                 })
             ) : (
-                <p>Loading</p>
+                <Loader />
             )}
         </div>
     );

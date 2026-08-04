@@ -13,7 +13,7 @@ const HeaderComponent: FC<HeaderProps> = ({ classes }) => {
         visible ? setIsOpenUsersDropdown(visible) : setIsOpenUsersDropdown(!isOpenUsersDropdown);
     };
     const navigate = useNavigate();
-    const [titleHeader, setTitleHeader] = useState<string>('Home');
+    const [titleHeader, setTitleHeader] = useState<string>();
 
     useEffect(() => {
         const title = Utils.handleHeaderTitle(window.location.pathname);
