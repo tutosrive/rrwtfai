@@ -1,21 +1,48 @@
-import type { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState, type FC } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Dropdown from './dropdown.component';
+import Utils from '../utils/Utils';
 
 interface HeaderProps {
     classes?: string;
 }
 
 const HeaderComponent: FC<HeaderProps> = ({ classes }) => {
+    const [isOpenUsersDropdown, setIsOpenUsersDropdown] = useState<boolean>(false);
+    const toggleIsOpenDropdownUser = (visible?: boolean) => {
+        visible ? setIsOpenUsersDropdown(visible) : setIsOpenUsersDropdown(!isOpenUsersDropdown);
+    };
+    const navigate = useNavigate();
+    const [titleHeader, setTitleHeader] = useState<string>();
+
+    useEffect(() => {
+        const title = Utils.handleHeaderTitle(window.location.pathname);
+        setTitleHeader(title);
+    }, [window.location.pathname]);
+
     return (
         <div id='header-c' className={`${classes?.toString()} w-full bg-mist-950 row-span-1 flex items-center justify-center`}>
-            <nav>
-                <Link to={'/'} className='me-2'>
-                    Home
-                </Link>
-                <Link to={'/users'} className=''>
-                    Users
-                </Link>
-            </nav>
+            <div className='w-full h-full flex items-center justify-center'>
+                <h1 className='text-xl font-semibold uppercase'>{titleHeader}</h1>
+            </div>
+            <div className='absolute end-px flex items-center h-full justify-end me-2'>
+                <nav>
+                    <Link to={'/'} className='me-2'>
+                        <i className='fa-solid fa-house'></i>
+                    </Link>
+                    <Dropdown title={<i className='fa-solid fa-users'></i>} visible={isOpenUsersDropdown} changeVisible={toggleIsOpenDropdownUser} defaultAction={() => navigate('/users')}>
+                        <div>
+                            <Link to={'/users'} onClick={() => toggleIsOpenDropdownUser} className='flex items-center justify-center px-1 py-1 text-sm font-medium text-mist-50 transition-colors hover:bg-mist-200 hover:text-mist-900' role='menuitem'>
+                                <i className='fa-solid fa-users'></i> v2
+                            </Link>
+                            <Link to={'/users-v1'} onClick={() => toggleIsOpenDropdownUser} className='flex items-center justify-center px-1 py-1 text-sm font-medium text-mist-50 transition-colors hover:bg-mist-200 hover:text-mist-900' role='menuitem'>
+                                <i className='fa-solid fa-users'></i> v1
+                            </Link>
+                        </div>
+                    </Dropdown>
+                    <Link to={'/users'} className=''></Link>
+                </nav>
+            </div>
         </div>
     );
 };
