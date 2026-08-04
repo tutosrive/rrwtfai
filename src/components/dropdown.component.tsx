@@ -6,13 +6,14 @@ interface DropdownProps {
     classes?: string;
     visible: boolean;
     changeVisible: (visivle?: boolean) => void;
+    defaultAction?: () => void;
 }
 
-const Dropdown: FC<DropdownProps> = ({ title, children, visible, changeVisible, classes }) => {
+const Dropdown: FC<DropdownProps> = ({ title, children, visible, changeVisible, defaultAction, classes }) => {
     return (
         <div className={`${classes?.toString()} relative inline-flex`}>
             <span className='inline-flex divide-x divide-gray-300 overflow-hidden rounded border border-gray-300 bg-white shadow-sm dark:divide-gray-600 dark:border-mist-900 dark:bg-mist-950'>
-                <button type='button' className='px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900 focus:relative dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white'>
+                <button type='button' onClick={defaultAction} className='px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900 focus:relative dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white'>
                     {title}
                 </button>
 
