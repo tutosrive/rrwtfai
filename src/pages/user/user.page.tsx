@@ -1,34 +1,18 @@
-import { useEffect, useState } from 'react';
-import UserProfile from '../../components/user/user-profile.component';
+import type { FC } from 'react';
 import type UserModel from '../../models/user.model';
-import UserService from '../../services/user.service';
+import UserProfile from '../../components/user/user-profile.component';
 
-export default function UserPage() {
-    const [users, setUsers] = useState<UserModel[]>();
-    const service: UserService = new UserService();
+interface UserPageProps {
+    classes?: string;
+    user: UserModel;
+}
 
-    const getData = async () => {
-        const data = await service.getAll();
-        setUsers(data);
-        console.log(users);
-    };
-
-    useEffect(() => {
-        getData();
-    }, []);
-
+const UserPage: FC<UserPageProps> = ({ classes, user }) => {
     return (
-        <div className='flex flex-col items-center justify-center p-5'>
-            <h1>User Page</h1>
-            <div className='flex flex-wrap items-center justify-center'>
-                {users ? (
-                    users.map((u) => {
-                        return <UserProfile key={u.id?.toString()} user={u} />;
-                    })
-                ) : (
-                    <p>Loading Page Users ...</p>
-                )}
-            </div>
+        <div id={`userpage-${user.id}`} className={`${classes?.toString()} w-full h-full`}>
+            <UserProfile user={user} />
         </div>
     );
-}
+};
+
+export default UserPage;
