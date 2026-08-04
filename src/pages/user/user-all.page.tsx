@@ -15,20 +15,14 @@ const UserAllPage = () => {
     };
 
     useEffect(() => {
-        console.log('First Load');
         if (users?.length == 0 || users === undefined || users === null) {
             loadUsers();
         }
     }, []);
 
-    useEffect(() => {
-        if (users) {
-            console.log(users?.length);
-        }
-    }, [users]);
-
     return (
         <div className={'w-full h-full flex items-center justify-center'}>
+            <h1></h1>
             {users ? (
                 users.map((user) => {
                     return <UserProfile key={user.id?.toString()} user={user} />;

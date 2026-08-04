@@ -1,6 +1,7 @@
 import { useEffect, useState, type FC } from 'react';
-import { Link, Router, useInRouterContext, useNavigate, useRoutes } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Dropdown from './dropdown.component';
+import Utils from '../utils/Utils';
 
 interface HeaderProps {
     classes?: string;
@@ -15,13 +16,14 @@ const HeaderComponent: FC<HeaderProps> = ({ classes }) => {
     const [titleHeader, setTitleHeader] = useState<string>('Home');
 
     useEffect(() => {
-        setTitleHeader(window.location.pathname.replaceAll('/', ' > '));
+        const title = Utils.handleHeaderTitle(window.location.pathname);
+        setTitleHeader(title);
     }, [window.location.pathname]);
 
     return (
         <div id='header-c' className={`${classes?.toString()} w-full bg-mist-950 row-span-1 flex items-center justify-center`}>
             <div className='w-full h-full flex items-center justify-center'>
-                <h1>{titleHeader}</h1>
+                <h1 className='text-xl font-semibold uppercase'>{titleHeader}</h1>
             </div>
             <div className='absolute end-px flex items-center h-full justify-end me-2'>
                 <nav>
