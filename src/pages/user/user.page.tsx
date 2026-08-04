@@ -1,4 +1,4 @@
-import { useEffect, useState, type FC } from 'react';
+import { useEffect, useState } from 'react';
 import type UserModel from '../../models/user.model';
 import UserProfile from '../../components/user/user-profile.component';
 import { useNavigate, useParams } from 'react-router-dom';
