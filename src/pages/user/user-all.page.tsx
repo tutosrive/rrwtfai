@@ -28,7 +28,7 @@ const UserAllPage = () => {
     }, [users]);
 
     return (
-        <div className={'w-full h-full'}>
+        <div className={'w-full h-full flex items-center justify-center'}>
             {users ? (
                 users.map((user) => {
                     return <UserProfile key={user.id?.toString()} user={user} />;
