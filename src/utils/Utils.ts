@@ -5,6 +5,9 @@ export default class Utils {
             const endpoint: string = currentPath.split('/').at(-1) ?? '';
 
             switch (endpoint) {
+                case 'rrwtfai':
+                    title = 'Home';
+                    break;
                 case 'users':
                     title = 'All Users';
                     break;
@@ -12,7 +15,7 @@ export default class Utils {
                     title = 'All Users (V1)';
                     break;
                 default:
-                    title = 'Home';
+                    title = 'User Profile';
             }
         }
         return title;

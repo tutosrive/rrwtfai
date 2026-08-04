@@ -17,10 +17,9 @@ export default class Service<T extends Model> {
         return data;
     }
 
-    getById(id: string): T | null {
-        console.log(id);
-
-        const data: T | null = null;
-        return data;
+    async getById(id: string): Promise<T | null> {
+        const req = await fetch(`${this.url}/${id}`);
+        const user: T = await req.json();
+        return user || null;
     }
 }
